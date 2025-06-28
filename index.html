@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SafeSpace</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      background: #f8f9fa;
+      color: #212529;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: #ffffff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav a {
+      margin: 0 1rem;
+      text-decoration: none;
+      color: #333;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: #007bff;
+    }
+    .search-bar {
+      background: #343a40;
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1.2rem;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .hero {
+      padding: 4rem 2rem;
+      text-align: center;
+      background: linear-gradient(to right, #000000, #ffffff);
+      color: white;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      font-size: 1.1rem;
+    }
+    .messages-section {
+      padding: 3rem 2rem;
+      text-align: center;
+      background: #e9ecef;
+    }
+    .messages-section h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .card-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .message-card {
+      background: white;
+      border-radius: 1rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 1.5rem;
+      width: 220px;
+      text-align: left;
+      transition: transform 0.3s ease;
+    }
+    .message-card:hover {
+      transform: translateY(-5px);
+    }
+    .message-card strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 800;
+    }
+    .form-section {
+      margin-top: 2rem;
+      display: none;
+    }
+    .form-section input, .form-section textarea {
+      padding: 0.5rem;
+      margin: 0.5rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      width: 90%;
+      max-width: 400px;
+    }
+    .form-section button {
+      background-color: #28a745;
+      color: white;
+      padding: 0.6rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+    .form-section button:hover {
+      background-color: #218838;
+    }
+    .add-message-button {
+      margin-top: 2rem;
+      padding: 0.75rem 2rem;
+      background-color: #9cad03;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .add-message-button:hover {
+      background-color: #b4b100;
+    }
+    .about {
+      padding: 4rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      background: white;
+    }
+    .about-logo {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      color: #007bff;
+    }
+    .about p {
+      max-width: 600px;
+      font-size: 1rem;
+      color: #555;
+    }
+    footer {
+      background: #212529;
+      color: white;
+      padding: 2rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      align-items: center;
+      font-size: 0.9rem;
+    }
+    .footer-links a {
+      color: white;
+      margin: 0 1rem;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .footer-links a:hover {
+      color: #0d6efd;
+    }
+    .socials img {
+      width: 36px;
+      margin-left: 0.75rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="C:\Users\dave\Documents\Ico schoolworks\logo.png" width="50"/>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="messages.html">Messages</a>
+    </nav>
+    <input type="text" id="search-input" class="search-bar" placeholder="Search name..." oninput="searchMessages()" />
+  </header>
+
+  <section class="hero">
+    <h1>SafeSpace</h1>
+    <p>SafeSpace is a web-based anonymous platform designed to support students with social anxiety. It provides a safe and judgment-free space where students can freely express their feelings and experiences.</p>
+    <p>This is everyone's safe space — where you are heard, supported, and never alone.</p>
+  </section>
+
+  <section class="messages-section">
+    <h2>Messages for your name</h2>
+    <p id="message-count"></p>
+    <div class="card-row" id="message-list"></div>
+    <button class="add-message-button" onclick="document.getElementById('message-form').style.display='block'">Add Message</button>
+
+    <div class="form-section" id="message-form">
+      <input type="text" id="to-name" placeholder="Recipient's Name" required /><br />
+      <textarea id="message-content" rows="4" placeholder="Your message..." required></textarea><br />
+      <button onclick="handleMessageSubmit()">Send</button>
+    </div>
+  </section>
+
+  <section class="about" id="about-section">
+    <img src="C:\Users\dave\Documents\Ico schoolworks\logo.png" width="100"/>
+    <h2>About Us</h2>
+    <p>We're a team of young coders with a simple goal: to help people share their thoughts and feelings anonymously. Whether it's a message you're too shy to say out loud or something you've been holding in, we created this platform to help you express it—safely and secretly.</p>
+    <p>Email us: <a href="mailto:safespace@gmail.com">safespace@gmail.com</a></p>
+  </section>
+
+  <footer>
+    <div>© SafeSpace</div>
+    <div class="footer-links">
+      <a href="#">Cookies Use</a>
+      <a href="#">Privacy Policy</a>
+    </div>
+    <div class="socials">
+      <img src="C:\Users\dave\Documents\Ico schoolworks\instagram.png" alt="Instagram" />
+    </div>
+  </footer>
+
+  <script>
+    const messageCountElem = document.getElementById('message-count');
+    const messageList = document.getElementById('message-list');
+    let messageCount = 0;
+    
+
+    function updateMessageCount() {
+      messageCountElem.textContent = `${messageCount} message${messageCount !== 1 ? 's' : ''} found`;
+    }
+
+    function addMessage(to, content) {
+      const newCard = document.createElement('div');
+      newCard.className = 'message-card';
+      newCard.innerHTML = `<strong>To: ${to}</strong><p>${content}</p>`;
+      messageList.appendChild(newCard);
+      messageCount++;
+      updateMessageCount();
+    }
+
+    function saveMessage(to, content) {
+      const messages = JSON.parse(localStorage.getItem('messages')) || [];
+      messages.push({ to, content });
+      localStorage.setItem('messages', JSON.stringify(messages));
+    }
+
+    function loadMessages() {
+      let messages = JSON.parse(localStorage.getItem('messages')) || [];
+      // Filter out messages to Jane
+      messages = messages.filter(({ to }) => to.toLowerCase() !== 'jane');
+      // Update storage without Jane's messages
+      localStorage.setItem('messages', JSON.stringify(messages));
+      // Add remaining messages to display
+      messages.forEach(({ to, content }) => addMessage(to, content));
+    }
+
+    function handleMessageSubmit() {
+      const to = document.getElementById('to-name').value.trim();
+      const content = document.getElementById('message-content').value.trim();
+      if (to && content) {
+        addMessage(to, content);
+        saveMessage(to, content);
+        document.getElementById('to-name').value = '';
+        document.getElementById('message-content').value = '';
+        document.getElementById('message-form').style.display = 'none';
+      }
+    }
+
+    function searchMessages() {
+      const query = document.getElementById('search-input').value.toLowerCase();
+      const cards = document.querySelectorAll('.message-card');
+      cards.forEach(card => {
+        const name = card.querySelector('strong').textContent.toLowerCase();
+        card.style.display = name.includes(query) ? 'block' : 'none';
+      });
+    }
+
+    loadMessages();
+  </script>
+</body>
+</html>
+
+
