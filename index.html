@@ -172,6 +172,19 @@
       width: 36px;
       margin-left: 0.75rem;
     }
+    .logout-button {
+      margin-left: 1rem;
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .logout-button:hover {
+    background-color: #c82333;
+    }
   </style>
 </head>
 <body>
@@ -182,6 +195,7 @@
       <a href="messages.html">Messages</a>
     </nav>
     <input type="text" id="search-input" class="search-bar" placeholder="Search name..." oninput="searchMessages()" />
+    <button onclick="logout()" class="logout-button">Log Out</button>
   </header>
 
   <section class="hero">
@@ -225,7 +239,16 @@
     const messageCountElem = document.getElementById('message-count');
     const messageList = document.getElementById('message-list');
     let messageCount = 0;
-    
+
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) {
+   window.location.href = 'login.html';
+    }
+
+    function logout() {
+    localStorage.removeItem('user');
+    window.location.href = 'login.html';
+    }
 
     function updateMessageCount() {
       messageCountElem.textContent = `${messageCount} message${messageCount !== 1 ? 's' : ''} found`;
