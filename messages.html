@@ -8,7 +8,7 @@
   <style>
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #f8f9fa;
+      background-color: #6299cc;
       margin: 0;
     }
     header {
@@ -63,7 +63,13 @@
     .message-card strong {
       display: block;
       margin-bottom: 0.5rem;
+    } 
+    .card-row-container {
+      max-height: 500px;
+      overflow-y: auto;
+      padding-right: 8px; 
     }
+
   </style>
 </head>
 <body>
@@ -76,7 +82,8 @@
   </header>
 
   <div class="container">
-    <h1>All Messages</h1>
+    <h1>Feed</h1>
+    <div class="card-row-container">
     <div class="card-row" id="all-message-list"></div>
   </div>
 

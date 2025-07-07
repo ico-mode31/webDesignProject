@@ -11,7 +11,7 @@
       font-family: 'Inter', sans-serif;
       line-height: 1.6;
       background: #f8f9fa;
-      color: #212529;
+      color: #000000;
     }
     header {
       display: flex;
@@ -19,7 +19,7 @@
       align-items: center;
       padding: 1rem 2rem;
       background: #ffffff;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 2px 8px rgba(0, 110, 255, 0.05);
       position: sticky;
       top: 0;
       z-index: 1000;
@@ -27,12 +27,12 @@
     nav a {
       margin: 0 1rem;
       text-decoration: none;
-      color: #333;
+      color: #000000;
       font-weight: 600;
       transition: color 0.3s ease;
     }
     nav a:hover {
-      color: #007bff;
+      color: #00c3ff;
     }
     .search-bar {
       background: #343a40;
@@ -42,11 +42,11 @@
       border-radius: 30px;
       cursor: pointer;
       font-weight: bold;
-    }
+    } 
     .hero {
       padding: 4rem 2rem;
       text-align: center;
-      background: linear-gradient(to right, #000000, #ffffff);
+      background: linear-gradient(to right, #0084ff, #ffffff);
       color: white;
     }
     .hero h1 {
@@ -104,7 +104,7 @@
       max-width: 400px;
     }
     .form-section button {
-      background-color: #28a745;
+      background-color: #0084ff;
       color: white;
       padding: 0.6rem 1.5rem;
       border: none;
@@ -114,12 +114,12 @@
       font-weight: bold;
     }
     .form-section button:hover {
-      background-color: #218838;
+      background-color: #0084ff;
     }
     .add-message-button {
       margin-top: 2rem;
       padding: 0.75rem 2rem;
-      background-color: #9cad03;
+      background-color: #0084ff;
       color: white;
       border: none;
       border-radius: 30px;
@@ -129,7 +129,7 @@
       transition: background-color 0.3s ease;
     }
     .add-message-button:hover {
-      background-color: #b4b100;
+      background-color: #0084ff;
     }
     .about {
       padding: 4rem 2rem;
@@ -172,6 +172,19 @@
       width: 36px;
       margin-left: 0.75rem;
     }
+    .logout-button {
+      margin-left: 1rem;
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .logout-button:hover {
+    background-color: #c82333;
+    }
   </style>
 </head>
 <body>
@@ -179,9 +192,10 @@
     <img src="C:\Users\dave\Documents\Ico schoolworks\logo.png" width="50"/>
     <nav>
       <a href="index.html">Home</a>
-      <a href="messages.html">Messages</a>
+      <a href="messages.html">Browse Feed</a>
     </nav>
     <input type="text" id="search-input" class="search-bar" placeholder="Search name..." oninput="searchMessages()" />
+    <button onclick="logout()" class="logout-button">Log Out</button>
   </header>
 
   <section class="hero">
@@ -191,7 +205,7 @@
   </section>
 
   <section class="messages-section">
-    <h2>Messages for your name</h2>
+    <h2>Message for your Special Someone</h2>
     <p id="message-count"></p>
     <div class="card-row" id="message-list"></div>
     <button class="add-message-button" onclick="document.getElementById('message-form').style.display='block'">Add Message</button>
@@ -222,63 +236,116 @@
   </footer>
 
   <script>
-    const messageCountElem = document.getElementById('message-count');
-    const messageList = document.getElementById('message-list');
-    let messageCount = 0;
-    
+  const messageCountElem = document.getElementById('message-count');
+  const messageList = document.getElementById('message-list');
+  let messageCount = 0;
 
-    function updateMessageCount() {
-      messageCountElem.textContent = `${messageCount} message${messageCount !== 1 ? 's' : ''} found`;
+  const user = JSON.parse(localStorage.getItem('user'));
+  if (!user) {
+    window.location.href = 'login.html';
+  }
+
+  function logout() {
+    localStorage.removeItem('user');
+    window.location.href = 'login.html';
+  }
+
+  function updateMessageCount() {
+    messageCountElem.textContent = `${messageCount} message${messageCount !== 1 ? 's' : ''} found`;
+  }
+
+  function addMessage(to, content, index, sender) {
+    const newCard = document.createElement('div');
+    newCard.className = 'message-card';
+    newCard.innerHTML = `
+      <strong>To: ${to}</strong>
+      <p class="message-content">${content}</p>
+    `;
+
+    // Only show Edit button if current user is sender
+    if (user.email === sender) {
+      const editBtn = document.createElement('button');
+      editBtn.textContent = "Edit";
+      editBtn.style.cssText = "margin-top:10px;background:#ffc107;border:none;padding:5px 10px;border-radius:6px;cursor:pointer;";
+      editBtn.onclick = () => editMessage(index);
+      newCard.appendChild(editBtn);
     }
 
-    function addMessage(to, content) {
-      const newCard = document.createElement('div');
-      newCard.className = 'message-card';
-      newCard.innerHTML = `<strong>To: ${to}</strong><p>${content}</p>`;
-      messageList.appendChild(newCard);
-      messageCount++;
-      updateMessageCount();
-    }
+    messageList.appendChild(newCard);
+    messageCount++;
+    updateMessageCount();
+  }
 
-    function saveMessage(to, content) {
-      const messages = JSON.parse(localStorage.getItem('messages')) || [];
-      messages.push({ to, content });
+  function saveMessage(to, content) {
+    const messages = JSON.parse(localStorage.getItem('messages')) || [];
+    messages.push({ to, content, sender: user.email });
+    localStorage.setItem('messages', JSON.stringify(messages));
+  }
+
+  function loadMessages() {
+    let messages = JSON.parse(localStorage.getItem('messages')) || [];
+
+    // Optional: Remove Jane's messages
+    messages = messages.filter(({ to }) => to.toLowerCase() !== 'jane');
+
+    localStorage.setItem('messages', JSON.stringify(messages));
+
+    messages.forEach(({ to, content, sender }, index) => {
+      addMessage(to, content, index, sender);
+    });
+  }
+
+  function handleMessageSubmit() {
+    const to = document.getElementById('to-name').value.trim();
+    const content = document.getElementById('message-content').value.trim();
+
+    if (!to || !content) return;
+
+    const messages = JSON.parse(localStorage.getItem('messages')) || [];
+
+    if (editIndex !== null) {
+      // Editing existing message
+      messages[editIndex] = { to, content, sender: user.email };
       localStorage.setItem('messages', JSON.stringify(messages));
+      editIndex = null;
+    } else {
+      // Adding new message
+      saveMessage(to, content);
     }
 
-    function loadMessages() {
-      let messages = JSON.parse(localStorage.getItem('messages')) || [];
-      // Filter out messages to Jane
-      messages = messages.filter(({ to }) => to.toLowerCase() !== 'jane');
-      // Update storage without Jane's messages
-      localStorage.setItem('messages', JSON.stringify(messages));
-      // Add remaining messages to display
-      messages.forEach(({ to, content }) => addMessage(to, content));
-    }
+    document.getElementById('to-name').value = '';
+    document.getElementById('message-content').value = '';
+    document.getElementById('message-form').style.display = 'none';
+    location.reload(); // refresh to see update
+  }
 
-    function handleMessageSubmit() {
-      const to = document.getElementById('to-name').value.trim();
-      const content = document.getElementById('message-content').value.trim();
-      if (to && content) {
-        addMessage(to, content);
-        saveMessage(to, content);
-        document.getElementById('to-name').value = '';
-        document.getElementById('message-content').value = '';
-        document.getElementById('message-form').style.display = 'none';
-      }
-    }
+  let editIndex = null;
 
-    function searchMessages() {
-      const query = document.getElementById('search-input').value.toLowerCase();
-      const cards = document.querySelectorAll('.message-card');
-      cards.forEach(card => {
-        const name = card.querySelector('strong').textContent.toLowerCase();
-        card.style.display = name.includes(query) ? 'block' : 'none';
-      });
-    }
+  function editMessage(index) {
+    const messages = JSON.parse(localStorage.getItem('messages')) || [];
+    const msg = messages[index];
+    if (!msg || msg.sender !== user.email) return;
 
-    loadMessages();
-  </script>
+    document.getElementById('to-name').value = msg.to;
+    document.getElementById('message-content').value = msg.content;
+    document.getElementById('message-form').style.display = 'block';
+
+    const sendBtn = document.querySelector('#message-form button');
+    sendBtn.textContent = 'Update';
+    editIndex = index;
+  }
+
+  function searchMessages() {
+    const query = document.getElementById('search-input').value.toLowerCase();
+    const cards = document.querySelectorAll('.message-card');
+    cards.forEach(card => {
+      const name = card.querySelector('strong').textContent.toLowerCase();
+      card.style.display = name.includes(query) ? 'block' : 'none';
+    });
+  }
+
+  loadMessages();
+</script>
 </body>
 </html>
 
