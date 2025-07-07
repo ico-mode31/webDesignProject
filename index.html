@@ -236,27 +236,12 @@
   </footer>
 
   <script>
-<<<<<<< HEAD
   const messageCountElem = document.getElementById('message-count');
   const messageList = document.getElementById('message-list');
-  let messageCount = 0;
-=======
-    const messageCountElem = document.getElementById('message-count');
-    const messageList = document.getElementById('message-list');
-    let messageCount = 0;
-
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (!user) {
-   window.location.href = 'login.html';
-    }
-
-    function logout() {
-    localStorage.removeItem('user');
-    window.location.href = 'login.html';
-    }
->>>>>>> ea3780177752d64bf41e1b4f05f7b0b461b8055e
-
   const user = JSON.parse(localStorage.getItem('user'));
+  let editIndex = null;
+  let messageCount = 0;
+
   if (!user) {
     window.location.href = 'login.html';
   }
@@ -278,13 +263,18 @@
       <p class="message-content">${content}</p>
     `;
 
-    // Only show Edit button if current user is sender
     if (user.email === sender) {
       const editBtn = document.createElement('button');
       editBtn.textContent = "Edit";
-      editBtn.style.cssText = "margin-top:10px;background:#ffc107;border:none;padding:5px 10px;border-radius:6px;cursor:pointer;";
+      editBtn.style.cssText = "margin-top:10px;margin-right:5px;background:#ffc107;border:none;padding:5px 10px;border-radius:6px;cursor:pointer;";
       editBtn.onclick = () => editMessage(index);
       newCard.appendChild(editBtn);
+
+      const deleteBtn = document.createElement('button');
+      deleteBtn.textContent = "Delete";
+      deleteBtn.style.cssText = "margin-top:10px;background:#dc3545;color:white;border:none;padding:5px 10px;border-radius:6px;cursor:pointer;";
+      deleteBtn.onclick = () => deleteMessage(index);
+      newCard.appendChild(deleteBtn);
     }
 
     messageList.appendChild(newCard);
@@ -292,19 +282,12 @@
     updateMessageCount();
   }
 
-  function saveMessage(to, content) {
-    const messages = JSON.parse(localStorage.getItem('messages')) || [];
-    messages.push({ to, content, sender: user.email });
-    localStorage.setItem('messages', JSON.stringify(messages));
-  }
+  function renderMessages() {
+    messageList.innerHTML = '';
+    messageCount = 0;
 
-  function loadMessages() {
     let messages = JSON.parse(localStorage.getItem('messages')) || [];
-
-    // Optional: Remove Jane's messages
     messages = messages.filter(({ to }) => to.toLowerCase() !== 'jane');
-
-    localStorage.setItem('messages', JSON.stringify(messages));
 
     messages.forEach(({ to, content, sender }, index) => {
       addMessage(to, content, index, sender);
@@ -317,25 +300,26 @@
 
     if (!to || !content) return;
 
-    const messages = JSON.parse(localStorage.getItem('messages')) || [];
+    let messages = JSON.parse(localStorage.getItem('messages')) || [];
 
     if (editIndex !== null) {
-      // Editing existing message
       messages[editIndex] = { to, content, sender: user.email };
-      localStorage.setItem('messages', JSON.stringify(messages));
       editIndex = null;
     } else {
-      // Adding new message
-      saveMessage(to, content);
+      messages.push({ to, content, sender: user.email });
     }
+
+    localStorage.setItem('messages', JSON.stringify(messages));
 
     document.getElementById('to-name').value = '';
     document.getElementById('message-content').value = '';
     document.getElementById('message-form').style.display = 'none';
-    location.reload(); // refresh to see update
-  }
 
-  let editIndex = null;
+    const sendBtn = document.querySelector('#message-form button');
+    sendBtn.textContent = 'Send';
+
+    renderMessages();
+  }
 
   function editMessage(index) {
     const messages = JSON.parse(localStorage.getItem('messages')) || [];
@@ -351,6 +335,15 @@
     editIndex = index;
   }
 
+  function deleteMessage(index) {
+    let messages = JSON.parse(localStorage.getItem('messages')) || [];
+    if (messages[index].sender !== user.email) return;
+
+    messages.splice(index, 1);
+    localStorage.setItem('messages', JSON.stringify(messages));
+    renderMessages();
+  }
+
   function searchMessages() {
     const query = document.getElementById('search-input').value.toLowerCase();
     const cards = document.querySelectorAll('.message-card');
@@ -360,7 +353,7 @@
     });
   }
 
-  loadMessages();
+  renderMessages();
 </script>
 </body>
 </html>
