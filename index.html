@@ -236,9 +236,25 @@
   </footer>
 
   <script>
+<<<<<<< HEAD
   const messageCountElem = document.getElementById('message-count');
   const messageList = document.getElementById('message-list');
   let messageCount = 0;
+=======
+    const messageCountElem = document.getElementById('message-count');
+    const messageList = document.getElementById('message-list');
+    let messageCount = 0;
+
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) {
+   window.location.href = 'login.html';
+    }
+
+    function logout() {
+    localStorage.removeItem('user');
+    window.location.href = 'login.html';
+    }
+>>>>>>> ea3780177752d64bf41e1b4f05f7b0b461b8055e
 
   const user = JSON.parse(localStorage.getItem('user'));
   if (!user) {
