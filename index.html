@@ -14,50 +14,57 @@
       color: #000000;
     }
     header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      background: #ffffff;
-      box-shadow: 0 2px 8px rgba(0, 110, 255, 0.05);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-    nav a {
-      margin: 0 1rem;
-      text-decoration: none;
-      color: #000000;
-      font-weight: 600;
-      transition: color 0.3s ease;
-    }
+  display: flex;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 110, 255, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+nav {
+  display: flex;
+  margin-left: 1rem; 
+}
+nav a {
+  margin: 0 0.5rem; 
+  text-decoration: none;
+  color: #000000;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
     nav a:hover {
       color: #00c3ff;
     }
     .search-bar {
-      background: #343a40;
-      color: #fff;
-      border: none;
-      padding: 0.5rem 1.2rem;
-      border-radius: 30px;
-      cursor: pointer;
-      font-weight: bold;
-    } 
+  background: #f1f3f5; 
+  color: #495057; 
+  border: 1px solid #ced4da; 
+  padding: 0.5rem 1rem; 
+  border-radius: 30px; 
+  width: 250px; 
+  transition: border-color 0.3s ease; 
+}
+.search-bar:focus {
+  outline: none; 
+  border-color: #0084ff; 
+}
     .hero {
-      padding: 4rem 2rem;
-      text-align: center;
-      background: linear-gradient(to right, #0084ff, #ffffff);
-      color: white;
-    }
-    .hero h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-    }
-    .hero p {
-      max-width: 600px;
-      margin: 0 auto 2rem;
-      font-size: 1.1rem;
-    }
+  padding: 4rem 2rem;
+  text-align: center;
+  background: #3593ea; 
+  color: white; 
+}
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+.hero p {
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  font-size: 1.1rem;
+}
     .messages-section {
       padding: 3rem 2rem;
       text-align: center;
@@ -67,6 +74,46 @@
       font-size: 2rem;
       margin-bottom: 1rem;
     }
+    .message-card {
+  position: relative; 
+  padding: 1rem;
+  margin: 1rem 0;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.message-actions {
+  display: flex;
+  justify-content: flex-end; 
+  margin-top: 10px; 
+}
+
+.react-button {
+  background: none;
+  border: none; 
+  cursor: pointer; 
+  position: absolute; 
+  top: 10px; 
+  right: 10px; 
+}
+
+.edit-button, .share-button {
+  background: none; 
+  border: none; 
+  cursor: pointer; 
+  margin-left: 5px; 
+}
+
+.edit-icon, .share-icon {
+  width: 20px; 
+  height: 20px; 
+}
+
+.edit-button:hover, .share-button:hover {
+  opacity: 0.7; 
+}
+
     .card-row {
       display: flex;
       justify-content: center;
@@ -150,7 +197,7 @@
       color: #555;
     }
     footer {
-      background: #212529;
+      background: #2e9aff;
       color: white;
       padding: 2rem;
       display: flex;
@@ -173,30 +220,31 @@
       margin-left: 0.75rem;
     }
     .logout-button {
-      margin-left: 1rem;
-      background-color: #dc3545;
-      color: white;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    .logout-button:hover {
-    background-color: #c82333;
-    }
+  margin-left: auto;
+  background-color: #dc3545; 
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease; 
+}
+.logout-button:hover {
+  background-color: #c82333; 
+}
   </style>
 </head>
 <body>
-  <header>
-    <img src="C:\Users\dave\Documents\Ico schoolworks\logo.png" width="50"/>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="messages.html">Browse Feed</a>
-    </nav>
-    <input type="text" id="search-input" class="search-bar" placeholder="Search name..." oninput="searchMessages()" />
-    <button onclick="logout()" class="logout-button">Log Out</button>
-  </header>
+<header>
+  <img src="C:\Users\dave\Documents\Ico schoolworks\logo.png" width="50"/>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="messages.html">Browse Feed</a>
+  </nav>
+  <input type="text" id="search-input" class="search-bar" placeholder="Search name..." oninput="searchMessages()" />
+  <button onclick="logout()" class="logout-button">Log Out</button>
+</header>
 
   <section class="hero">
     <h1>SafeSpace</h1>
@@ -256,31 +304,45 @@
   }
 
   function addMessage(to, content, index, sender) {
-    const newCard = document.createElement('div');
-    newCard.className = 'message-card';
-    newCard.innerHTML = `
-      <strong>To: ${to}</strong>
-      <p class="message-content">${content}</p>
-    `;
+  const newCard = document.createElement('div');
+  newCard.className = 'message-card';
+  newCard.innerHTML = `
+    <strong>To: ${to}</strong>
+    <p class="message-content">${content}</p>
+    <div class="message-actions">
+      <button class="react-button" onclick="toggleHeart(${index})">❤️</button>
+    </div>
+  `;
 
-    if (user.email === sender) {
-      const editBtn = document.createElement('button');
-      editBtn.textContent = "Edit";
-      editBtn.style.cssText = "margin-top:10px;margin-right:5px;background:#ffc107;border:none;padding:5px 10px;border-radius:6px;cursor:pointer;";
-      editBtn.onclick = () => editMessage(index);
-      newCard.appendChild(editBtn);
+  if (user.email === sender) {
+    const editBtn = document.createElement('button');
+    editBtn.textContent = "Edit";
+    editBtn.style.cssText = "margin-top:10px;margin-right:5px;background:#ffc107;border:none;padding:5px 10px;border-radius:6px;cursor:pointer;";
+    editBtn.onclick = () => editMessage(index);
+    newCard.appendChild(editBtn);
 
-      const deleteBtn = document.createElement('button');
-      deleteBtn.textContent = "Delete";
-      deleteBtn.style.cssText = "margin-top:10px;background:#dc3545;color:white;border:none;padding:5px 10px;border-radius:6px;cursor:pointer;";
-      deleteBtn.onclick = () => deleteMessage(index);
-      newCard.appendChild(deleteBtn);
-    }
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = "Delete";
+    deleteBtn.style.cssText = "margin-top:10px;background:#dc3545;color:white;border:none;padding:5px 10px;border-radius:6px;cursor:pointer;";
+    deleteBtn.onclick = () => deleteMessage(index);
+    newCard.appendChild(deleteBtn);
 
-    messageList.appendChild(newCard);
-    messageCount++;
-    updateMessageCount();
+    const shareBtn = document.createElement('button');
+    shareBtn.textContent = "Share";
+    shareBtn.style.cssText = "margin-top:10px;margin-left:5px;background:#007bff;color:white;border:none;padding:5px 10px;border-radius:6px;cursor:pointer;";
+    shareBtn.onclick = () => shareMessage(content);
+    newCard.appendChild(shareBtn);
   }
+
+  const heartButton = newCard.querySelector('.react-button');
+  heartButton.style.position = 'absolute';
+  heartButton.style.top = '10px';
+  heartButton.style.right = '10px';
+
+  messageList.appendChild(newCard);
+  messageCount++;
+  updateMessageCount();
+}
 
   function renderMessages() {
     messageList.innerHTML = '';
@@ -353,9 +415,31 @@
     });
   }
 
+  let heartCounts = {}; 
+function toggleHeart(index) {
+  if (!heartCounts[index]) {
+    heartCounts[index] = 1; 
+  } else {
+    heartCounts[index]++; 
+  }
+  alert(`You liked this message! Total likes: ${heartCounts[index]}`);
+}
+function shareMessage(content) {
+  const shareText = `Check out this message: "${content}"`;
+  if (navigator.share) {
+    navigator.share({
+      title: 'Message from SafeSpace',
+      text: shareText,
+      url: window.location.href
+    })
+    .then(() => console.log('Message shared successfully!'))
+    .catch((error) => console.error('Error sharing message:', error));
+  } else {
+    alert(shareText); 
+  }
+}
+
   renderMessages();
 </script>
 </body>
 </html>
-
-
