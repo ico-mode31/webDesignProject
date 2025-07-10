@@ -14,57 +14,57 @@
       color: #000000;
     }
     header {
-  display: flex;
-  align-items: center;
-  padding: 1rem 2rem;
-  background: #ffffff;
-  box-shadow: 0 2px 8px rgba(0, 110, 255, 0.05);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-nav {
-  display: flex;
-  margin-left: 1rem; 
-}
-nav a {
-  margin: 0 0.5rem; 
-  text-decoration: none;
-  color: #000000;
-  font-weight: 600;
-  transition: color 0.3s ease;
-}
+      display: flex;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: #ffffff;
+      box-shadow: 0 2px 8px rgba(0, 110, 255, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav {
+      display: flex;
+      margin-left: 1rem; 
+    }
+    nav a {
+      margin: 0 0.5rem; 
+      text-decoration: none;
+      color: #000000;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
     nav a:hover {
       color: #00c3ff;
     }
     .search-bar {
-  background: #f1f3f5; 
-  color: #495057; 
-  border: 1px solid #ced4da; 
-  padding: 0.5rem 1rem; 
-  border-radius: 30px; 
-  width: 250px; 
-  transition: border-color 0.3s ease; 
-}
-.search-bar:focus {
-  outline: none; 
-  border-color: #0084ff; 
-}
+      background: #f1f3f5; 
+      color: #495057; 
+      border: 1px solid #ced4da; 
+      padding: 0.5rem 1rem; 
+      border-radius: 30px; 
+      width: 250px; 
+      transition: border-color 0.3s ease; 
+    }
+    .search-bar:focus {
+      outline: none; 
+      border-color: #0084ff; 
+    }
     .hero {
-  padding: 4rem 2rem;
-  text-align: center;
-  background: #3593ea; 
-  color: white; 
-}
-.hero h1 {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-}
-.hero p {
-  max-width: 600px;
-  margin: 0 auto 2rem;
-  font-size: 1.1rem;
-}
+      padding: 4rem 2rem;
+      text-align: center;
+      background: #3593ea; 
+      color: white; 
+    }
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      font-size: 1.1rem;
+    }
     .messages-section {
       padding: 3rem 2rem;
       text-align: center;
@@ -75,45 +75,39 @@ nav a {
       margin-bottom: 1rem;
     }
     .message-card {
-  position: relative; 
-  padding: 1rem;
-  margin: 1rem 0;
-  border: 1px solid #ced4da;
-  border-radius: 8px;
-  background: #ffffff;
-}
-
-.message-actions {
-  display: flex;
-  justify-content: flex-end; 
-  margin-top: 10px; 
-}
-
-.react-button {
-  background: none;
-  border: none; 
-  cursor: pointer; 
-  position: absolute; 
-  top: 10px; 
-  right: 10px; 
-}
-
-.edit-button, .share-button {
-  background: none; 
-  border: none; 
-  cursor: pointer; 
-  margin-left: 5px; 
-}
-
-.edit-icon, .share-icon {
-  width: 20px; 
-  height: 20px; 
-}
-
-.edit-button:hover, .share-button:hover {
-  opacity: 0.7; 
-}
-
+      position: relative; 
+      padding: 1rem;
+      margin: 1rem 0;
+      border: 1px solid #ced4da;
+      border-radius: 8px;
+      background: #ffffff;
+    }
+    .message-actions {
+      display: flex;
+      justify-content: flex-end; 
+      margin-top: 10px; 
+    }
+    .react-button {
+      background: none;
+      border: none; 
+      cursor: pointer; 
+      position: absolute; 
+      top: 10px; 
+      right: 10px; 
+    }
+    .edit-button, .share-button {
+      background: none; 
+      border: none; 
+      cursor: pointer; 
+      margin-left: 5px; 
+    }
+    .edit-icon, .share-icon {
+      width: 20px; 
+      height: 20px; 
+    }
+    .edit-button:hover, .share-button:hover {
+      opacity: 0.7; 
+    }
     .card-row {
       display: flex;
       justify-content: center;
@@ -220,19 +214,104 @@ nav a {
       margin-left: 0.75rem;
     }
     .logout-button {
-  margin-left: auto;
-  background-color: #dc3545; 
+      margin-left: auto;
+      background-color: #dc3545; 
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s ease; 
+    }
+    .logout-button:hover {
+      background-color: #c82333; 
+    }
+    
+    .modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+   .modal-content {
+  position: relative;
+  background-color: #ffffff;
+  margin: auto;
+  padding: 2rem;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 450px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  top: 50%;
+  transform: translateY(-50%);
+}
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .benefits {
+      list-style-type: none;
+      padding: 0;
+    }
+    .benefits li {
+      margin: 0.5rem 0;
+    }
+    .payment-form input {
+      display: block;
+      margin: 0.5rem 0;
+    }
+    #payment-form button {
+  background: linear-gradient(90deg, #007bff, #00c6ff);
   color: white;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
   border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
+  border-radius: 30px;
   cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s ease; 
+  transition: all 0.3s ease;
+  display: block;
+  margin: 1rem auto 0 auto;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
 }
-.logout-button:hover {
-  background-color: #c82333; 
+
+.modal-content h2,
+.modal-content h3,
+.modal-content p {
+  margin-bottom: 1rem;
+  text-align: center;
 }
+.benefits ul {
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+
+#payment-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
+  filter: brightness(1.1);
+}
+
   </style>
 </head>
 <body>
@@ -241,69 +320,94 @@ nav a {
   <nav>
     <a href="index.html">Home</a>
     <a href="messages.html">Browse Feed</a>
+    <a href="#" id="upgrade-button">Upgrade to Premium</a> <!-- Link to open modal -->
   </nav>
   <input type="text" id="search-input" class="search-bar" placeholder="Search name..." oninput="searchMessages()" />
   <button onclick="logout()" class="logout-button">Log Out</button>
 </header>
 
-  <section class="hero">
-    <h1>SafeSpace</h1>
-    <p>SafeSpace is a web-based anonymous platform designed to support students with social anxiety. It provides a safe and judgment-free space where students can freely express their feelings and experiences.</p>
-    <p>This is everyone's safe space — where you are heard, supported, and never alone.</p>
-  </section>
+<section class="hero">
+  <h1>SafeSpace</h1>
+  <p>SafeSpace is a web-based anonymous platform designed to support students with social anxiety. It provides a safe and judgment-free space where students can freely express their feelings and experiences.</p>
+  <p>This is everyone's safe space — where you are heard, supported, and never alone.</p>
+</section>
 
-  <section class="messages-section">
-    <h2>Message for your Special Someone</h2>
-    <p id="message-count"></p>
-    <div class="card-row" id="message-list"></div>
-    <button class="add-message-button" onclick="document.getElementById('message-form').style.display='block'">Add Message</button>
+<section class="messages-section">
+  <h2>Message for your Special Someone</h2>
+  <p id="message-count"></p>
+  <div class="card-row" id="message-list"></div>
+  <button class="add-message-button" onclick="document.getElementById('message-form').style.display='block'">Add Message</button>
 
-    <div class="form-section" id="message-form">
-      <input type="text" id="to-name" placeholder="Recipient's Name" required /><br />
-      <textarea id="message-content" rows="4" placeholder="Your message..." required></textarea><br />
-      <button onclick="handleMessageSubmit()">Send</button>
+  <div class="form-section" id="message-form">
+    <input type="text" id="to-name" placeholder="Recipient's Name" required /><br />
+    <textarea id="message-content" rows="4" placeholder="Your message..." required></textarea><br />
+    <button onclick="handleMessageSubmit()">Send</button>
+  </div>
+</section>
+
+<section class="about" id="about-section">
+  <img src="C:\Users\dave\Documents\Ico schoolworks\logo.png" width="100"/>
+  <h2>About Us</h2>
+  <p>We're a team of young coders with a simple goal: to help people share their thoughts and feelings anonymously. Whether it's a message you're too shy to say out loud or something you've been holding in, we created this platform to help you express it—safely and secretly.</p>
+  <p>Email us: <a href="mailto:safespace@gmail.com">safespace@gmail.com</a></p>
+</section>
+
+<footer>
+  <div>© SafeSpace</div>
+  <div class="footer-links">
+    <a href="#">Cookies Use</a>
+    <a href="#">Privacy Policy</a>
+  </div>
+  <div class="socials">
+    <img src="C:\Users\dave\Documents\Ico schoolworks\instagram.png" alt="Instagram" />
+  </div>
+</footer>
+
+<div id="premium-modal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h2>Upgrade to Premium</h2>
+    <div class="benefits">
+      <h3>Benefits of Premium Membership</h3>
+      <ul class="benefits"> <!-- Added the correct class -->
+        <li>✔️ Access to exclusive features</li>
+        <li>✔️ Priority support</li>
+        <li>✔️ Enhanced privacy options</li>
+        <li>✔️ Ad-free experience</li>
+      </ul>
     </div>
-  </section>
+    <h3>Pricing</h3>
+    <p>Only ₱70/month!</p>
+    <form id="payment-form" class="payment-form"> <!-- Added class="payment-form" -->
+      <input type="text" placeholder="Card Number" required />
+      <input type="text" placeholder="Expiration Date (MM/YY)" required />
+      <input type="text" placeholder="CVV" required />
+      <button type="submit">Upgrade Now</button>
+    </form>
+  </div>
+</div>
 
-  <section class="about" id="about-section">
-    <img src="C:\Users\dave\Documents\Ico schoolworks\logo.png" width="100"/>
-    <h2>About Us</h2>
-    <p>We're a team of young coders with a simple goal: to help people share their thoughts and feelings anonymously. Whether it's a message you're too shy to say out loud or something you've been holding in, we created this platform to help you express it—safely and secretly.</p>
-    <p>Email us: <a href="mailto:safespace@gmail.com">safespace@gmail.com</a></p>
-  </section>
+<script>
+const messageCountElem = document.getElementById('message-count');
+const messageList = document.getElementById('message-list');
+const user = JSON.parse(localStorage.getItem('user'));
+let editIndex = null;
+let messageCount = 0;
 
-  <footer>
-    <div>© SafeSpace</div>
-    <div class="footer-links">
-      <a href="#">Cookies Use</a>
-      <a href="#">Privacy Policy</a>
-    </div>
-    <div class="socials">
-      <img src="C:\Users\dave\Documents\Ico schoolworks\instagram.png" alt="Instagram" />
-    </div>
-  </footer>
+if (!user) {
+  window.location.href = 'login.html';
+}
 
-  <script>
-  const messageCountElem = document.getElementById('message-count');
-  const messageList = document.getElementById('message-list');
-  const user = JSON.parse(localStorage.getItem('user'));
-  let editIndex = null;
-  let messageCount = 0;
+function logout() {
+  localStorage.removeItem('user');
+  window.location.href = 'login.html';
+}
 
-  if (!user) {
-    window.location.href = 'login.html';
-  }
+function updateMessageCount() {
+  messageCountElem.textContent = `${messageCount} message${messageCount !== 1 ? 's' : ''} found`;
+}
 
-  function logout() {
-    localStorage.removeItem('user');
-    window.location.href = 'login.html';
-  }
-
-  function updateMessageCount() {
-    messageCountElem.textContent = `${messageCount} message${messageCount !== 1 ? 's' : ''} found`;
-  }
-
-  function addMessage(to, content, index, sender) {
+function addMessage(to, content, index, sender) {
   const newCard = document.createElement('div');
   newCard.className = 'message-card';
   newCard.innerHTML = `
@@ -344,78 +448,78 @@ nav a {
   updateMessageCount();
 }
 
-  function renderMessages() {
-    messageList.innerHTML = '';
-    messageCount = 0;
+function renderMessages() {
+  messageList.innerHTML = '';
+  messageCount = 0;
 
-    let messages = JSON.parse(localStorage.getItem('messages')) || [];
-    messages = messages.filter(({ to }) => to.toLowerCase() !== 'jane');
+  let messages = JSON.parse(localStorage.getItem('messages')) || [];
+  messages = messages.filter(({ to }) => to.toLowerCase() !== 'jane');
 
-    messages.forEach(({ to, content, sender }, index) => {
-      addMessage(to, content, index, sender);
-    });
+  messages.forEach(({ to, content, sender }, index) => {
+    addMessage(to, content, index, sender);
+  });
+}
+
+function handleMessageSubmit() {
+  const to = document.getElementById('to-name').value.trim();
+  const content = document.getElementById('message-content').value.trim();
+
+  if (!to || !content) return;
+
+  let messages = JSON.parse(localStorage.getItem('messages')) || [];
+
+  if (editIndex !== null) {
+    messages[editIndex] = { to, content, sender: user.email };
+    editIndex = null;
+  } else {
+    messages.push({ to, content, sender: user.email });
   }
 
-  function handleMessageSubmit() {
-    const to = document.getElementById('to-name').value.trim();
-    const content = document.getElementById('message-content').value.trim();
+  localStorage.setItem('messages', JSON.stringify(messages));
 
-    if (!to || !content) return;
+  document.getElementById('to-name').value = '';
+  document.getElementById('message-content').value = '';
+  document.getElementById('message-form').style.display = 'none';
 
-    let messages = JSON.parse(localStorage.getItem('messages')) || [];
+  const sendBtn = document.querySelector('#message-form button');
+  sendBtn.textContent = 'Send';
 
-    if (editIndex !== null) {
-      messages[editIndex] = { to, content, sender: user.email };
-      editIndex = null;
-    } else {
-      messages.push({ to, content, sender: user.email });
-    }
+  renderMessages();
+}
 
-    localStorage.setItem('messages', JSON.stringify(messages));
+function editMessage(index) {
+  const messages = JSON.parse(localStorage.getItem('messages')) || [];
+  const msg = messages[index];
+  if (!msg || msg.sender !== user.email) return;
 
-    document.getElementById('to-name').value = '';
-    document.getElementById('message-content').value = '';
-    document.getElementById('message-form').style.display = 'none';
+  document.getElementById('to-name').value = msg.to;
+  document.getElementById('message-content').value = msg.content;
+  document.getElementById('message-form').style.display = 'block';
 
-    const sendBtn = document.querySelector('#message-form button');
-    sendBtn.textContent = 'Send';
+  const sendBtn = document.querySelector('#message-form button');
+  sendBtn.textContent = 'Update';
+  editIndex = index;
+}
 
-    renderMessages();
-  }
+function deleteMessage(index) {
+  let messages = JSON.parse(localStorage.getItem('messages')) || [];
+  if (messages[index].sender !== user.email) return;
 
-  function editMessage(index) {
-    const messages = JSON.parse(localStorage.getItem('messages')) || [];
-    const msg = messages[index];
-    if (!msg || msg.sender !== user.email) return;
+  messages.splice(index, 1);
+  localStorage.setItem('messages', JSON.stringify(messages));
+  renderMessages();
+}
 
-    document.getElementById('to-name').value = msg.to;
-    document.getElementById('message-content').value = msg.content;
-    document.getElementById('message-form').style.display = 'block';
+function searchMessages() {
+  const query = document.getElementById('search-input').value.toLowerCase();
+  const cards = document.querySelectorAll('.message-card');
+  cards.forEach(card => {
+    const name = card.querySelector('strong').textContent.toLowerCase();
+    card.style.display = name.includes(query) ? 'block' : 'none';
+  });
+}
 
-    const sendBtn = document.querySelector('#message-form button');
-    sendBtn.textContent = 'Update';
-    editIndex = index;
-  }
-
-  function deleteMessage(index) {
-    let messages = JSON.parse(localStorage.getItem('messages')) || [];
-    if (messages[index].sender !== user.email) return;
-
-    messages.splice(index, 1);
-    localStorage.setItem('messages', JSON.stringify(messages));
-    renderMessages();
-  }
-
-  function searchMessages() {
-    const query = document.getElementById('search-input').value.toLowerCase();
-    const cards = document.querySelectorAll('.message-card');
-    cards.forEach(card => {
-      const name = card.querySelector('strong').textContent.toLowerCase();
-      card.style.display = name.includes(query) ? 'block' : 'none';
-    });
-  }
-
-  let heartCounts = {}; 
+let heartCounts = {}; 
 function toggleHeart(index) {
   if (!heartCounts[index]) {
     heartCounts[index] = 1; 
@@ -439,11 +543,23 @@ function shareMessage(content) {
   }
 }
 
-  renderMessages();
+// Modal functions
+const modal = document.getElementById("premium-modal");
+const upgradeButton = document.getElementById("upgrade-button");
+
+upgradeButton.onclick = function() {
+  modal.style.display = "block";
+}
+
+function closeModal() {
+  modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    closeModal();
+  }
+}
+
+renderMessages();
 </script>
-</body>
-<<<<<<< HEAD
-</html>
-=======
-</html>
->>>>>>> c1d66f9ddbc1fdba8aa28bfb1d83d13b913a1b7e
