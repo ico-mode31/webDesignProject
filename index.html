@@ -4,9 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>SafeSpace</title>
-<<<<<<< HEAD
   <link rel="stylesheet" href="style.css"/>
-=======
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -315,8 +313,7 @@
   filter: brightness(1.1);
 }
 
-  </style>
->>>>>>> ceb567ae3161bb1b574c6572de2814edfff2601c
+  </style>  
 </head>
 <body>
 <header>
@@ -324,11 +321,7 @@
   <nav>
     <a href="index.html">Home</a>
     <a href="messages.html">Browse Feed</a>
-<<<<<<< HEAD
-    <a href="#" id="upgrade-button">Upgrade to Premium</a> 
-=======
-    <a href="#" id="upgrade-button">Upgrade to Premium</a> <!-- Link to open modal -->
->>>>>>> ceb567ae3161bb1b574c6572de2814edfff2601c
+    <a href="#" id="upgrade-button">Upgrade to Premium</a>
   </nav>
   <input type="text" id="search-input" class="search-bar" placeholder="Search name..." oninput="searchMessages()" />
   <button onclick="logout()" class="logout-button">Log Out</button>
@@ -377,11 +370,8 @@
     <h2>Upgrade to Premium</h2>
     <div class="benefits">
       <h3>Benefits of Premium Membership</h3>
-<<<<<<< HEAD
       <ul class="benefits"> 
-=======
-      <ul class="benefits"> <!-- Added the correct class -->
->>>>>>> ceb567ae3161bb1b574c6572de2814edfff2601c
+      <ul class="benefits">
         <li>✔️ Access to exclusive features</li>
         <li>✔️ Priority support</li>
         <li>✔️ Enhanced privacy options</li>
@@ -390,11 +380,8 @@
     </div>
     <h3>Pricing</h3>
     <p>Only ₱70/month!</p>
-<<<<<<< HEAD
     <form id="payment-form" class="payment-form"> 
-=======
-    <form id="payment-form" class="payment-form"> <!-- Added class="payment-form" -->
->>>>>>> ceb567ae3161bb1b574c6572de2814edfff2601c
+    <form id="payment-form" class="payment-form">
       <input type="text" placeholder="Card Number" required />
       <input type="text" placeholder="Expiration Date (MM/YY)" required />
       <input type="text" placeholder="CVV" required />
@@ -403,11 +390,9 @@
   </div>
 </div>
 
-<<<<<<< HEAD
 <script src="script.js"></script>
 </body>
 </html>
-=======
 <script>
 const messageCountElem = document.getElementById('message-count');
 const messageList = document.getElementById('message-list');
@@ -564,7 +549,6 @@ function shareMessage(content) {
   }
 }
 
-// Modal functions
 const modal = document.getElementById("premium-modal");
 const upgradeButton = document.getElementById("upgrade-button");
 
@@ -584,4 +568,3 @@ window.onclick = function(event) {
 
 renderMessages();
 </script>
->>>>>>> ceb567ae3161bb1b574c6572de2814edfff2601c
